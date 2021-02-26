@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>복합 구조의 레이아웃</title>
+<style>
+    #navi{
+        background-color: skyblue;
+        width: 700px;
+        height: 100px;
+    }
+    #side{
+        background-color: paleturquoise;
+        width: 100px;
+        height:550px;
+        /*그 아무도 수평 공간에 허용하지 않는 block 속성을 버리게 하는 방법
+        즉, inline과 block의 특징(내용이 없어도 크기를 가져가고, 다른 block과 위치를 함께 할 수 있는) */
+        display: inline-block;
+    }
+    #content{
+        background-color: peachpuff;
+        width: 600px;
+        height: 550px;
+        display: inline-block;
+    }
+    #s{
+        background-color: peachpuff;
+        position: absolute;
+        left:0px;
+        top:10px;
+    }
+    #s2{
+        background-color: salmon;
+        position: absolute;
+        left : 10px;
+        top : 20px;
+    }
+    #box{
+        background-color: plum;
+    }
+
+</style>
+
+</head>
+<body>
+    <!--모든 태그는 박스 모델로 간주되며
+    속성은 크게 block, lnline 속성을 갖는다
+    block : 나와 같은 수평 공간에 어떤 누구도 허용하지 않는다. (width, height 지정이 가능)
+    inline : 다른 태그 요소들과 수평 공간에 공존할 수 있다. (크기 지정 불가, 내용 만큼만 늘어남)-->
+    <!--
+        왜 모든 태그는 왼쪽 상단으로 향할까?
+        : 왼쪽 상단을 기준으로 했기 때문!
+        알 수 있는 사실 : 모든 태그는 개발자가 포지션을 지정하지 않아도, 이미 왼쪽 상단을
+        기준으로 한 포지션이 디폴트로 지정되어 있다.
+        So, 이러한 포지션을 positiong:relative 라 한다. (전일 relative -> absolute 사용. 단, 원래 웹사이트 만들 때 쓰기 위험.)
+        왜 상대적이라고 부를까? : 내용의 절대적 위치가 설정된 것이 아닌, 적은 순서 대로 위치가 설정되었음.
+=>따라서 content를 위로 올리면 block인 상태를 inline으로 수정
+    -->
+    <!--
+        <span id="s">난 span</span>
+    <span id="s2">난 span2</span>
+    <div id="box">난 div</div>
+    -->
+   
+    <div id="navi">노란색 박스</div>
+    <div id="side">사이드</div>
+    <div id="content">컨텐츠 영역</div>
+   
+</body>
+</html>

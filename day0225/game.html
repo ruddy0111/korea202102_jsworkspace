@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*누구를 어떻게*/
+        body{background-image:url(../images/bg.jpg);
+        background-repeat:no-repeat;
+        background-size: cover;
+        }
+        /* html문서
+        따라서 주인공의 위치를 원하는 곳에 두려면, html상 원래 불가능하다.
+        byt css를 이용하여 이 한계를 극복할 수 있다.
+        이 예제에서는 스타일 시트의 위치 지정 속성을 배워보자.*/
+        .hero{
+            width:100px;
+            position: absolute;/*절대위치*/
+            left: 200px; /*x축의 값을 200으로*/
+            top:300px /*y축의 값을 300으로*/
+
+        }
+    </style>
+</head>
+
+<body>
+<img src="../images/hero.png" class="hero">
+</body>
+</html>

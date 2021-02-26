@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>복합 구조의 레이아웃</title>
+<style>
+    #navi{
+        background-color: skyblue;
+        width: 700px;
+        height: 100px;
+    }
+    #side{
+        background-color: paleturquoise;
+        width: 100px;
+        height:550px;
+        float: left; /*물체를 공중으로 부양, 남을 배척하는 능력이 사라져버림*/
+    }
+    #content{
+        background-color: peachpuff;
+        width: 600px;
+        height: 550px;
+        float:left;
+
+    }
+    #wrapper{
+        /*margin-left: 300px /*좌측을 기준으로 x축 양의 방향으로 300px이동*/;
+        /*좌, 우측의 남는 여백 공간을 2분하여, 동일하게 좌우 마진을 적용하는 방법*/
+        width: 700px;
+        height: 550px;
+        margin:auto
+    }
+
+</style>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="navi">navi</div>
+        <div id="side">side </div>
+        <div id="content">contents</div>
+    </div>
+</body>
+</html>

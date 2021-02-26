@@ -1,0 +1,188 @@
+﻿Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\USER>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on 금 2월 26 09:41:51 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sqlplus sys/ as sysdba
+SP2-0306: Invalid option.
+Usage: CONN[ECT] [{logon|/|proxy} [AS {SYSDBA|SYSOPER|SYSASM}] [edition=value]]
+where <logon> ::= <username>[/<password>][@<connect_identifier>]
+      <proxy> ::= <proxyuser>[<username>][/<password>][@<connect_identifier>]
+Enter user-name: sys/admin1234 as sysdba
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> connect system/admin1234
+Connected.
+SQL> show user;
+USER is "SYSTEM"
+SQL> create tablespace frontspace
+  2
+SQL> create tablesapce forntspace datafile 'C:\oraclexe\app\oracle\oradata\XE' s
+ize 1m
+  2
+SQL> ^V
+SP2-0042: unknown command "" - rest of line ignored.
+SQL> crerate tablespace frontspace
+SP2-0734: unknown command beginning "crerate ta..." - rest of line ignored.
+SQL> create tablespace frontspace
+  2  datafile 'C:\oraclexe\app\oracle\oradata\XE'
+  3  size 1m
+  4
+SQL> create tablespace frontspace
+  2  datafile 'C:\oraclexe\app\oracle\oradata\XE'
+  3  size 1m;
+create tablespace frontspace
+*
+ERROR at line 1:
+ORA-01119: error in creating database file 'C:\oraclexe\app\oracle\oradata\XE'
+ORA-27038: created file already exists
+OSD-04010: <create> option specified, file already exists
+
+
+SQL> create tablespace frontspace
+  2  datafile 'C:\oraclexe\app\oracle\oradata\XE\frontspace.dbf'
+  3  size 1m;
+
+Tablespace created.
+
+SQL> create user front
+  2
+SQL> create user front
+  2  identified by 1234
+  3  default tablespace frontspace
+  4  qouta unlimited on frontspce;
+qouta unlimited on frontspce
+*
+ERROR at line 4:
+ORA-00922: missing or invalid option
+
+
+SQL> create user front
+  2  identified by 1234
+  3  default tablespace frontspace
+  4  quota unlimited on frontspace;
+
+User created.
+
+SQL> conn front/1234
+ERROR:
+ORA-01045: user FRONT lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> show user
+USER is ""
+SQL> conn system/admin1234
+Connected.
+SQL> show user
+USER is "SYSTEM"
+SQL> grant create session to front;
+
+Grant succeeded.
+
+SQL> conn front/1234
+Connected.
+SQL> show user
+USER is "FRONT"
+SQL> creat table student
+SP2-0734: unknown command beginning "creat tabl..." - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table student(
+  2     name varchar(20),
+  3     money number
+  4     regdate date
+  5* )
+SQL>
+SQL> run
+  1  create table student(
+  2     name varchar(20),
+  3     money number
+  4     regdate date
+  5* )
+        regdate date
+        *
+ERROR at line 4:
+ORA-00907: missing right parenthesis
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table student(
+  2     name varchar(20),
+  3     money number,
+  4     regdate date
+  5* )
+SQL>
+SQL> run
+  1  create table student(
+  2     name varchar(20),
+  3     money number,
+  4     regdate date
+  5* )
+create table student(
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn system/admin
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL>
+SQL> connsystem/admn1234
+SP2-0734: unknown command beginning "connsystem..." - rest of line ignored.
+SQL> connsystem/admin1234
+SP2-0734: unknown command beginning "connsystem..." - rest of line ignored.
+SQL> show user
+USER is ""
+SQL> conn system/admin1234
+Connected.
+SQL> show user
+USER is "SYSTEM"
+SQL> grant create table to fornt;
+grant create table to fornt
+                      *
+ERROR at line 1:
+ORA-01917: user or role 'FORNT' does not exist
+
+
+SQL> grant create table to front;
+
+Grant succeeded.
+
+SQL> show user
+USER is "SYSTEM"
+SQL> conn front/ 1234
+Connected.
+SQL> show user
+USER is "FRONT"
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table student(
+  2     name varchar(20),
+  3     money number,
+  4     regdate date
+  5* )
+SQL> run
+  1  create table student(
+  2     name varchar(20),
+  3     money number,
+  4     regdate date
+  5* )
+
+Table created.
+
+SQL>
