@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="../js/bar.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+    var wrapper;
+    var barArray=new Array();//막대기 1개를 담는 전역변수
+    var colorArray=["red","orange","yellow","green","blue","navy","purple"];
+    var count=0;//
+    var flag=true;
+
+function init(){
+    wrapper=document.getElementById("wrapper");
+    wrapper.style.width=500+"px";
+    wrapper.style.height=400+"px";
+    wrapper.style.margin="auto";
+    wrapper.style.position="relative";
+    wrapper.style.border="4px solid blue";
+
+    createBar();//이퀄라이저 박스 생성하기
+
+}
+//생성자의 프로토 타입
+function createBar(){
+    for(var i=0;i<10;i++){
+        var bar = new Bar(wrapper,50, 50, 50*i, 0 
+        , colorArray[getRandom(colorArray.length)] , getRandom(350)+10);
+        barArray.push(bar);
+    }
+}
+//게임에서 움직이는 모든 호출은 여기서 진행
+function gameLoop(){
+    if (flag){
+        for(var i=0;i<barArray.length;i++){
+            barArray[i].render();
+        }
+        count++;
+        //setTarget();
+    }
+   
+}
+//일정 시간 간격으로, 어떤 바를 움직일지를 결정하여, 그 bar의 targetH의 값을 지정해보자
+function setTarget(){
+    //늦출 필요가 있을 때는 속도 조절
+    if(count%4==0){
+    barArray[getRandom(barArray.length)].targetH=getRandom(350)+10;
+    }
+}
+window.addEventListener("load",function(){
+    init();
+    setInterval("gameLoop()",10)//fps frame per seconds
+})
+</script>
+</head>
+<body>
+    <div id="wrapper"></div>
+    <button onClick="flag=!flag">on/off</button>
+</body>
+</html>
+<!--자바스크립트 작성 영역
+1) script영역 안
+2) 이벤트 핸들러 안
+3) a href="javascript:영역"-->

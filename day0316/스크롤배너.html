@@ -1,0 +1,70 @@
+<script>
+    //모든걸 동적으로 처리할 예정이므로, 각종 정보를 전역변수로 선언하자.
+    var imgWidth=100;//상품 이미지의 너비
+    var imgHeight=100;//상품 이미지의 너비
+    var gap=5;//이미지 사이의 간격
+    var imgCount=3;//액자에 보여질 이미지 개수, 액자의 크기 결정
+    var container
+    var imgArray=[//배너에 사용할 이미지 업로드
+        "aa.jpg","ab.jpg", "ac.jpg","ad.jpg","ae.jpg", "af.jpg", "ag.jpg", "ah.jpg", "ai.jpg", "aj.jpg"]
+    var bannerImg=[]//img 태그 자체를 담게 될 배열(추후 이 배열 이용해 이동)
+    var targetX=0;//임계점에 도달한 모든 이미지가 가야할 곳
+    var flag=true;//흐름을 동작시킬지 여부를 결정하는 논리값
+    function init(){
+       createFrame();
+       createImg();
+       targetX=(bannerImg.length-1)*(imgWidth+gap);
+       setInterval("flowImg()", 100);
+        }
+    //액자 만들기
+    function createFrame(){//프레임을 동적으로 생성하자  
+        container=document.createElement("div");
+        container.style.width=gap+((imgWidth+gap)*imgCount)+"px";
+        container.style.height=(imgHeight+gap*2)+"px";
+        container.style.margin="auto";
+        container.style.background="green";
+        document.body.appendChild(container);
+        container.style.position="relative";
+        container.style.overflow="hidden";
+    }
+    //이미지 생성하기
+    function createImg(){
+        for(var i=0;i<imgArray.length;i++){
+        var img = document.createElement("img");
+        img.src="../Images/free/cat/"+imgArray[i];
+        img.style.width=imgWidth+"px";
+        img.style.height=imgHeight+"px";
+
+        img.style.position="absolute";
+        img.style.left=gap+(imgWidth+gap)*i+"px";
+        img.style.top=gap+"px";
+        //이미지에 마우스 이벤트 연결
+        img.addEventListener("mouseover", function(){
+            flag=false;
+        })
+        img.addEventListener("mouseout", function(){
+            flag=true;
+        })
+        container.appendChild(img);
+        //비어있는 배열에 이미지를 추가하자
+        bannerImg.push(img);
+        }
+    }
+    function flowImg(){
+        if(flag){
+            for(var i=0; i<bannerImg.length;i++){
+            bannerImg[i].style.left=parseInt(bannerImg[i].style.left)-5+"px";
+
+            //이동 후 임계 지점 도달 시 순환
+            //div를 벗어나면 왼쪽으로 갈수록 -인 상태이므로 -105의 상태가 되면 실행되어야 한다.
+                if(parseInt(bannerImg[i].style.left)<-(imgWidth+gap)){
+                    console.log("도착했어요ㅠㅜ");
+                    bannerImg[i].style.left=targetX+"px";
+                }
+            }
+        }
+    }
+window.addEventListener("load", function(){
+    init();
+});
+</script>

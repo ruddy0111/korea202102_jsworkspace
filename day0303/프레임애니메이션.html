@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #hero{
+        width: 250px;
+        height: 250px;
+    }
+
+</style>
+    <script>
+        //애니메이션 효과를 내기 위해서는 이미지를 교체
+        var n=1;
+function next(){
+    n = n +1;
+    //문서내의 이미지의 src의 값을 변하게 하자!!
+    document.querySelector("img").src="../images/free/"+n+".jpg";
+}
+    </script>
+</head>
+<body>
+    <button onClick="next()">동작</button>
+    <img id="hero" src="../images/free/1.jpg" alt="">
+</body>
+</html>

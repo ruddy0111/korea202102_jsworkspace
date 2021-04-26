@@ -1,0 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script>
+    /*
+    JQuery는 신기술이 아니라, 2006년대 미국의 한 개발자에 의해 소개된
+    자바스크립트 기반의 라이브러리다.(객체, 함수 등 집합)
+    주 사용 목적 : 자바스크립트 문법을 알아야 DOM등을 제어할 수 있으므로
+                        개발자가 아닌 사람들에게는 js는 진입장벽이 높다.
+                        따라서, js를 사용하지 않고, Jquery를 이용하여
+                        동일한 제어 효과를 낼 수 있는 LIB
+    특징 : 코드가 간략하다.
+    문법 : (누구를).어떻게()
+            *이 때, 누구 자리에 오는 문법 구성 요소를 선택자라 한다.
+            여기서의 선택자란 CSS에서의 바로 그 선택자를 의미한다.
+    */
+/*function init(){
+document.querySelector("h1")
+}
+window.addEventListener("load", function(){
+    init();
+});
+*/
+//js load event를, JQuery에서는 다음과 같이 표현한다.
+//window.addEventLisener("load", function(){});
+//변수명은 특수문자 금지, _,$ 는 가능
+$(document).ready(function(){
+    //alert("문서 로드했어");
+    //document.querySelector("h1").innerText="apple";
+    //$("h1").text("apple");//innerText;
+    //$("h1").html("Orange");//innerHTML;
+    //$("#box").html("Orange");
+    $("input[type='text']").val("바보")
+
+});
+</script>
+<h1 id="box"></h1>
+<input type="text">
+<input type="checkbox">

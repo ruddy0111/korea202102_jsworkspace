@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+body{margin: 0px;}
+.wrapper{
+    width: 700px;
+    height: 600px;
+    background-color: antiquewhite;
+    overflow: hidden;
+}
+.menu{
+    width: 100px;
+    height: 100%;
+    background-color: aliceblue;
+    float: left;
+}
+.content{
+    width: 600px;
+    height: 100%;
+    background-color: beige;
+    float: left;
+    position: relative;
+}
+.menu img{
+    width: 80px;
+    height:70px;
+    border:3px solid gray;
+}
+    </style>
+    <script>
+var img_name; //도장 찍힐 이미지명
+//content div에 마우스를 누를 때마다 이미지를 동적으로 부착한다.
+//단, 이미지가 붙을 위치는 마우스를 클릭한 좌표로 동일하게.
+function stamp(){
+    var img=document.createElement("img");//메모리 상에만 존재
+    img.src="../images/free/"+img_name+".jpg";
+    img.style.width=70+"px";
+    //content에 부착하자
+    var content = document.querySelector(".content");
+    content.appendChild(img);
+    //x,y좌표 값을 마우스 값과 일치
+    var x=event.clientX;
+    var y=event.clientY;
+    img.style.position="absolute";
+    img.style.left=x+"px";
+    img.style.top=y+"px";
+}
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content" onmousedown="stamp()"></div>
+        
+        <div class="menu">
+        <img src="../images/free/1.jpg" onClick="img_name=1">
+        <img src="../images/free/2.jpg" onClick="img_name=2">
+        <img src="../images/free/3.jpg" onClick="img_name=3">
+        <img src="../images/free/4.jpg" onClick="img_name=4">
+        <img src="../images/free/5.jpg" onClick="img_name=5">
+        </div>
+    </div>
+</body>
+</html>

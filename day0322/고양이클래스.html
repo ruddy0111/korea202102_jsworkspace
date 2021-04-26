@@ -1,0 +1,25 @@
+<!--
+객체 지향 언어(OOP) : 현실의 모든 사물을 프로그래밍 언어로 표현하고자 개발된 언어
+- Object Oriented Programming
+- 우리 주변의 모든 사물, 모든 유·무형의 개념까지도 객체로 표현할 수 있다.
+-->
+<script>
+class cat{
+    /*클래스란 변수와 함수를 하나의 단위 묶을 수 있는 코드단위*/
+
+    //속성은 변수로 표현
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+        this.img=document.createElement("img");
+        this.img.src="../images/free/cat001.png";
+        this.img.style.position="absolute";
+        this.img.style.left=this.x+"px";
+        this.img.style.top=this.y+"px";
+        this.img.style.width=100+"px";
+        //body에 부착 
+        document.body.appendChild(this.img);
+    }
+    //동작은 함수로 표현
+}
+</script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+#wrapper{
+    background-color: aliceblue;
+    height: 500px;
+    width: 550px;
+    text-align: center;
+    padding-left: 16px;
+}
+#hero{
+    position: absolute; /*부모인 body를 기준으로 위치 설정*/
+    left:0px;
+    top:200px;
+}
+
+</style>
+<script>
+    //와 잘 만드셧네요 ^^
+    var flag=true; 
+    var n=0; //우주선의 x좌표를 결정할 변수
+
+    function move(){ 
+        n=parseInt(n);
+        (n>=500)? flag=false:0;
+        (n<=0)? flag=true:0;
+        (flag)? n+=10 : n-=10; //n은기존 n에 10을 더하시오(누적) or -10 
+        document.querySelector("h1").innerText="x값:"+n;
+            //h1태그 안쪽에 좌표 텍스트 출력
+
+        document.querySelector("#hero").style.left=n+"px";
+            //문서 내의ㅣ hero요소의 left 값을 변경시키자+좌표 정보도 갱신
+            //증가시킨 변수를 우주선의 좌표에도 사용
+        }
+    function auto(){
+        setInterval("move()",100); 
+    }
+    function SMove(){
+        n = document.querySelector("#num").value;
+        n=parseInt(n); 
+        document.querySelector("h1").innerText="x값:"+n;
+        document.querySelector("#hero").style.left=n+"px";
+        n<10||n>=500;
+    }
+    //set the max value of input box , when user on key up ok ?
+    //사용자가 인풋박스에서 포커스를 없애는 순간 잡아내야 합니당이때 onBlur 
+    function setFlowNum(){
+        n = document.querySelector("#num").value;
+        (n>500)? alert("you must input value 0~500") : n=n=parseInt(n);
+        (n>500)?document.querySelector("#hero").style.left="500px" : 0;
+        (n>500)? n=500:0; //n이 500 이상이면 n== 500
+
+        (n<0)? alert("you must input value 0~500") : n=n=parseInt(n); 
+        (n<0)?document.querySelector("#hero").style.left="0px" : 0;
+        (n<0)? n=0:0;
+        document.querySelector("#num").value=n;
+    }           
+</script>
+
+
+<body>
+<div id="wrapper">
+    <label for="num">(0 ~ 500)</label>
+    <input type="number" id="num" name="num" min="0" max="500" onBlur="setFlowNum()">
+  
+    <button onClick="SMove()">이동</button>
+    <br>
+    <br>
+    <button onClick="move()">수동으로 이동</button>
+    <button onClick="auto()">자동으로 이동</button>
+    <h1>x값</h1>
+</div>
+<img id="hero" src="../images/mine_cat.jpg" width="50px">
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="../js/ball.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+    var wrapper;
+    var ball;
+    var balls=[];
+    var ballArray=["ball1.png", "ball2.png", "ball3.png", "ball4.png", "ball5.png", "ball6.png", "ball7.png"];
+function init(){
+    createWall();
+}
+function createWall(){
+    wrapper = document.createElement("div");
+    wrapper.style.width=800+"px";
+    wrapper.style.height=700+"px";
+    wrapper.style.margin="auto";
+    wrapper.style.border=5+"px solid red";
+    wrapper.style.position="relative";//자식인 공 때문
+    document.body.appendChild(wrapper);
+}
+function createBall(){
+    var velX=getRandom(10)+1;
+    var velY=getRandom(10)+1;
+
+    ball = new Ball(wrapper, "../images/ball/"+ballArray[getRandom(ballArray.length)], 50, 50, velX, velY);//생성되는 공은 wrapper에 부착됨
+    balls.push(ball);
+}
+//키보드의 스페이스바를 누르면 볼을 생성
+function space(){
+    if(event.keyCode==32){//space var 아스키코드
+        createBall();
+    }
+}
+function gameLoop(){
+    for(var i=0; i<balls.length;i++){
+    balls[i].move();
+    }
+
+}
+window.addEventListener("load",function(){
+    init();
+    setInterval("gameLoop()",10);
+})
+</script>
+</head>
+<body onKeyDown="space()">
+</body>
+</html>

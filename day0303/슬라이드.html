@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+#wrapper{
+    width: 600px;
+    height: 600px;
+    margin:auto;
+}
+#pic{
+    width: 100%;
+    height: 550px;
+    background-color: aliceblue;
+}
+#control{
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+#pic img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+#control Img{
+    width: 40px;
+}
+.bt-right{
+    position: absolute;
+    right: 0px;
+}
+.bt-left{
+    position: absolute;
+    left: 0px;
+}
+</style>
+<script>
+    var n=1;
+function next(){
+    n=n+1
+//문서 내의 라 불리는 요소의 src값을 변경하자
+document.querySelector("#pic img").src="../images/free/"+n+".jpg";
+}
+function prev(){
+    n=n-1
+//문서 내의 라 불리는 요소의 src값을 변경하자
+document.querySelector("#pic img").src="../images/free/"+n+".jpg";
+}
+</script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="pic">
+            <img src="../images/free/1.jpg">
+        </div>
+        <div id="control">
+            <img id="bt1" src="../images/left.webp" class="bt-left" onClick="prev()">
+            <img id="bt2" src="../images/right.webp" class="bt-right" onClick="next()">
+        </div>
+    </div>
+</body>
+</html>

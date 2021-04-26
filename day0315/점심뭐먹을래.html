@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+//랜덤 구하기
+var food=["치킨","회","마라탕","소고기","곱창","짜장면","햄버거","피자","마라샹궈","케이크"]
+function  getRandom(){
+    console.log("당신이 선택할 수 있는 음식의 수는",food.length)
+    var r = parseInt( Math.random()*food.length);//js가 0~1 사이의 난수를 랜덤하게 반환
+    console.log("오늘의 추천메뉴 : ",food[r]);s
+
+}
+</script>
+</head>
+<body>
+    <button onClick="getRandom()">랜덤값 구하기</button>
+</body>
+</html>

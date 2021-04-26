@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 500px;
+            height: 700px;
+            background-color: cadetblue;
+            margin: auto;
+        }
+        #word-area{
+            width: 100%;
+            height: 200px;
+            background-color: cornflowerblue;
+            font-size: 100px;
+            text-align: center;
+        }
+        #input-area{
+            height: 150px;
+        }
+        #input-area input{
+            width: 98%;
+            height: 99%;
+            background-color: cornsilk;
+            font-weight: bold;
+            font-size: 85px;
+            text-align: center;
+        }
+        #feedback{
+            width: 100%;
+            height: 200px;
+            font-size: 80px;
+            background-color: rgba(0, 139, 139, 0.671);
+            color: crimson;
+            font-weight: bold;
+            text-align: center;
+        }
+        #score-area{
+            height: 150px;
+            font-size: 130px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <script>
+    //데이터를 배열화 시키면 순서가 생긴다. 따라서, 게임 시 다음 단어라는 개념이 생긴다.
+    var word=[
+        "송강"
+        ,"유태오"
+        ,"서강준"
+        ,"차은우"
+        ,"강동원"
+        ,"양세종"
+        ,"송중기"
+        ,"이동욱"
+        ,"박보검"
+        ,"임시완"
+        ]
+        //다른 함수에서 접근할 예정인 것들이므로 미리 전역변수 선언
+        var wordArea;
+        var inputArea;
+        var feedback;
+        var scoreArea;
+        var msg;
+        var index = 0;
+        var score=0;
+
+        function enter(){
+            //enter  쳤을 때만 아래의 코드가 수행되게 하려면 ASCII CODE로 조건 부여.
+            if(event.keyCode==13){
+                //아래의 코드는 맞는 단어를 입력했을 때만 수행하자.
+                if(wordArea.innerText==msg.value){
+                    index++;
+                    score+=10;
+                    scoreArea.innerText=score+"점";
+                    printWord();
+                    feedback.innerText="O";
+                    //맞음에 대한 피드백
+                    msg.value="";
+                }else{
+                    index++;
+                    printWord();
+                    feedback.innerText="X";
+                    //틀림에 대한 피드백
+                    msg.value="";
+                }
+                if(index==word.length){
+                feedback.innerText="게임종료";
+                }   
+            }
+        }
+        function init(){
+            wordArea=document.getElementById("word-area")
+            inputArea=document.getElementById("input-area")
+            msg=document.getElementById("msg")
+            feedback=document.getElementById("feedback")
+            scoreArea=document.getElementById("score-area")
+        }
+        //유저가 따라치게될 메시지 출력
+        function printWord(){
+            wordArea.innerText=word[index];
+        }
+        window.addEventListener("load", function(){
+            init();
+            printWord();
+            //프로그램 가동과 동시에 커서를 textbox에 위치 시킴
+            msg.focus();
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="word-area">단어 출력</div>
+        <div id="input-area">
+            <input type="text" placeholder="단어입력" id="msg" onkeyup="enter()">
+        </div>
+        <div id="feedback"></div>
+        <div id="score-area"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<script>
+var a="사과";
+var b="딸기";
+var c="오렌지;";
+var d="포도";
+var e="바나나";
+var f="귤";
+var g="수박";
+var h="배";
+var i="파파야";
+var j="복숭아";
+
+document.write(a+"<br>")
+document.write(b+"<br>")
+document.write(c+"<br>")
+document.write(d+"<br>")
+document.write(e+"<br>")
+document.write(f+"<br>")
+document.write(g+"<br>")
+document.write(h+"<br>")
+document.write(i+"<br>")
+document.write(j+"<br>")
+/*데이터에 대해 일일이 변수명을 할당하는 방식은, 대량의 데이터를 처리할 때는 비효율적
+따라서, 메모리에 데이터를 올릴 때 데이터의 줄을 세워 올리는 기법을 사용.(배열=array)*/
+
+var ani=new Array();//배열 선언 : 즉, 집합을 선언
+ani[0]="호랑이";
+ani[1]="사자";
+ani[2]="기린";
+ani[3]="고양이";
+ani[4]="개";
+ani[5]="하마";
+ani[6]="악어";
+ani[7]="쥐";
+ani[8]="닭";
+ani[9]="양";
+
+for(var i=0;i<10;i++){
+    document.write(ani[i]+"<br>");
+}
+
+</script>

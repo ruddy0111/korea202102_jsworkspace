@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            background-color: aliceblue;
+        }
+        #pic{
+            width: 100%;
+            height: 450px;
+            background-color: bisque;
+        }
+        #pic img{
+            width: 100%;
+            height: 100%;
+        }
+         #control{
+             width: 100%;
+             height: 50px;
+             background-color: cadetblue;
+             position: relative;
+         }
+         #bt-prev{
+            position: absolute;
+            left: 0px;
+            top: 25%;
+         }
+         #bt-next{
+            position: absolute;
+            right: 0px;
+            top: 25%;
+        }
+    </style>
+    <script>
+    var cat=["aa.jpg","ab.jpg","ac.jpg","ad.jpg","ae.jpg","af.jpg","ag.jpg","ah.jpg","ai.jpg","aj.jpg"]
+    var n=0;//이미지를 접근하기 위한 index
+
+function next(){//다음 사진 나오도록 처리
+    n++;   //숫자 제한 걸어놔야 함
+    var photo = document.getElementById("photo");
+
+    photo.src="../images/free/cat/"+cat[n];
+}
+function prev(){//다음 사진 나오도록 처리
+    n--;   //숫자 제한 걸어놔야 함
+    var photo = document.getElementById("photo");
+
+    photo.src="../images/free/cat/"+cat[n];
+}
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="pic">
+            <img src="../images/free/cat/aa.jpg" id="photo">
+        </div>
+        <div id="control">
+            <button id="bt-prev"onClick="prev()">prev</button>
+            <button id="bt-next" onClick="next()">next</button>
+        </div>
+    </div>
+</body>
+</html>

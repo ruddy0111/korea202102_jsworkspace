@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script>
+    var status; //상태를 담게 될 변수
+    var flag=true; //삼항 연산자의 판단대상이 될 논리값
+                        // 아래의 삼항연산자는 이 값이 true일 때 on반환,
+                        //이 값이 false일 때는 off를 반환한다.
+
+function openClose(){
+    //문서 내의 folder라는 요소의 src를 변경하되, 변경할 이미지 단 2가지
+    //어떠한 이미지가 나올지는 삼항연산자에게 맡겨보자
+    //true이면 on, false이면 off
+
+    status=(flag)?"on":"off";
+    //true/false로 고정되어 있으면 한 경우만 나오므로, ()안에도 변수가 와야 한다.
+    document.querySelector("#folder").src="../images/forder_"+status+".png";
+    flag=!flag;
+    //위에서 선언한 변수 flag를 뒤집는 함수
+    console.log("현재status=", status, "현재flag", flag);
+}
+
+</script>  
+</head>
+<body>
+    <img id="folder" src="../images/forder_off.png" onClick="openClose()">
+</body>
+</html>

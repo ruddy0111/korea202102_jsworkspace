@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        margin: 0px;
+    }
+        #wrapper{
+            width: 100%;
+            height: 700px;
+            background:  url(../images/mine.jpg) ;
+            background-repeat: repeat-x; /*x축으로만 반복*/
+            background-size: 100% 700px;
+            background-position: 0px,0px;
+        }
+
+        #hero{
+         position: absolute;
+         left:50px;
+         top: 150px;
+         width: 100px;
+         height: 65px;
+        }
+        }
+    </style>
+    <script>
+    /*프로그램 영역으로 예민하므로 오타 없이, 대소문자 가릴 것
+    아래의 코드를 무조건 실행을 막기 위해 블럭을 지정한 후 이름을 붙여보자
+    ()를 주어야 코드 블럭으로 이해한다.
+    아래의 코드 블럭의 이름은 moveBg이고, 개발자가 그 이름을 호출할 때 까지는
+    절대로 실행되지 않는다. 즉 불러야 일한다.*/
+    var x=0; //자바스크립트에서는 변수 선언시 var라는 키워드 사용(variable)
+    function moveBg(){
+        x=x -1//기존 x에 -1을 누적해서 다시 x에 대입!
+        console.log("변수 x값은",x);
+
+        //alert('나 불렀어?');
+        //문서 내의 wrapper라 불리는 요소의 배경을 x축의 음수 방향으로 이동시키자
+        document.querySelector("#wrapper").style.backgroundPosition=x+"px 0px";
+    }/*+ 연결자를 통해 손을 잡아줘야 한다.*/
+        /*수동이 아닌 자동으로 moveBg를 호출해주는 기능이 있다면?*/
+        function gameLoop(){
+            //자바스크립트가 스스로 moveBg를 호출
+            setInterval("moveBg()", 10);
+
+    }
+   //우측으로 이동함수 정의
+   var a=50; //초기 설정값이 50px였음
+   function MoveRight(){
+       a=a+5;
+       //문서 내의 hero요소의 style 시트 중 left값을 증가시키자
+       document.querySelector("#hero").style.left=a+"px";
+   }
+   function MoveLeft(){
+    a=a-5;
+       //문서 내의 hero요소의 style 시트 중 left값을 감소시키자
+       document.querySelector("#hero").style.left=a+"px";
+   }
+   var y=150; //초기 실정값이 150px였음zzzz
+   function MoveUp(){
+    y=y-5;
+       //문서 내의 hero요소의 style 시트 중 top값을 감소시키자
+       document.querySelector("#hero").style.top=y+"px";
+   }
+   function MoveDown(){
+    y=y+5;
+       //문서 내의 hero요소의 style 시트 중 top값을 증가시키자
+       document.querySelector("#hero").style.top=y+"px";
+   }
+
+  
+        </script>
+</head>
+<body>
+    <div id="wrapper">게임의 배경</div>
+    <div>
+        <img src="../images/hero.png" id="hero">
+    </div>
+    <!--이벤트 핸들러란? 해당 이벤트가 발생했을 때 어떤 자바스크립트 코드를 작성할지
+    결정할 수 있는 핸들러
+    프로그래밍 언어에서는 단어와 단어가 조합이 되면, 뒷 단어의 첫 철자를 낙타등으로
+    표기하는 습관이 있다.-->
+    <button onClick="moveBg();">배경 수동으로 움직이기</button>  <!--moveBg(); 코드 호출*/--> 
+    <button onclick="gameLoop()">auto</button>
+
+    <button onclick="MoveLeft()">>좌</button>
+    <button onclick="MoveRight()">우</button>
+    <button onclick="MoveUp()">>위</button>
+    <button onclick="MoveDown()">>아래</button>
+
+</body>
+</html>

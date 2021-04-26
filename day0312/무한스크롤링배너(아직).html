@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+#banner-frame{
+    width: 415px;
+    height: 110px;
+    background-color: pink;
+    margin: auto;
+    padding-top: 5px;
+    box-sizing: border-box/*padding, margin에 영향 받지 않음. 퍼블리셔 영역*/;
+    position: relative;/*자식 img.style 때문*/
+    overflow: hidden;
+}
+</style>
+<script>
+    var bannerFrame; //모든 함수에서 접근하기 위해
+    var gap=5;//이미지간 간격
+    function init(){//액자 안에 이미지 8개 동적 생성하여 위치
+        bannerFrame=document.getElementById("banner-frame");
+        createProduct();
+    }
+    function createProduct(){
+        for(var i=1; i<=8; i++){
+        var img = document.createElement("img");//태그를 이미지에 띄운것
+        img.src="../images/free/cat/"+i+".jpg";//<img src=""와 동일>
+        img.style.width=100+"px";
+        img.style.height=100+"px";
+        img.style.position="absolute";
+        img.style.left=(100+gap)*(i-1)+"px";//하나의 이미지가 차지하는 비율
+        //배너에 이미지 부착
+        bannerFrame.appendChild(img);
+        }
+    }
+    function move(){//생성된 이미지들 움직이기
+    }
+window.addEventListener("load", function(){
+    init()
+});
+</script>
+</head>
+<body>
+    <div id="banner-frame">
+    </div>
+</body>
+</html>

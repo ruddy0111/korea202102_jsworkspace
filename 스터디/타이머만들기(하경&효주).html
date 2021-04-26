@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머 만들기 과제</title>
+    <style>
+        body{
+            text-align: center;
+            background-color: cornflowerblue;
+            position: relative;
+        }
+        .wrapper{
+            border:3px solid #a092f2;
+            border-radius: 20px;
+            background-color: #7864ed;
+            width: 50%;
+            margin: auto;
+            top: 25%;
+            left: 25%;
+ 
+       }
+        #timeblock input{
+        font-size: 80px;
+        font-weight: bold;
+        width: 150px;
+        text-align: right;
+        background-color: #7864ed;
+        border-style: none;
+        color: #daed64;
+      
+    }
+    </style>
+    <script>     
+        var hours;
+        var mins;
+        var secs;
+        var x;
+        var hour_user=0;
+        var min_user=0;
+        var sec_user=0;
+
+        var now = new Date().getTime();       //뒤에 .getTime() 안 붙여도 됨. new Date();는 아무것도 입력 안하면 현시간을 가져옴
+        //var audio = new Audio("./images/mp3/cat.mp3");  
+       var countDownDate=now+ (hours*1000*60*60) + (mins*1000*60)+(secs*1000);
+   
+    function send(){
+        now = new Date().getTime();
+        hours = document.getElementById("hour_user").value;
+        mins = document.getElementById("min_user").value;
+        secs = document.getElementById("sec_user").value;
+        countDownDate=now+ (hours*1000*60*60) + (mins*1000*60)+(secs*1000);
+        init();
+};
+
+function init(){
+            x = setInterval(function(){
+            now = new Date().getTime();
+            var distance = countDownDate - now;
+            if(distance>0){
+                var h = parseInt(distance/(1000*60*60));
+                var m = parseInt((distance%(1000*60*60))/(1000*60));
+                var s = parseInt((distance%(1000*60))/1000);
+                document.getElementById("hour").value=h;
+                document.getElementById("min").value=m;
+                document.getElementById("sec").value=s;
+            }else{
+                document.getElementById("hour").value=0;  
+                document.getElementById("min").value=0;
+                document.getElementById("sec").value=0;
+                clearInterval(x)
+               // audio.play();
+                alert("타임 아웃");
+            }
+        });
+    }
+    function reset(){
+        clearInterval(x);
+
+       hour = 0;
+        min = 0;
+        sec =0;
+
+        hour_user=hour;
+        min_user=min;
+        sec_user=sec;
+
+
+      //document.getElementById("send").disabled=false;  
+    init();    
+}        
+
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+        </div>
+        <h1>목표 시간까지</h1>
+        <p>
+        <div id="timeblock">
+            <input type="text" id="hour">시간
+            <input type="text" id="min">분
+            <input type="text" id="sec">초
+        </div>
+        <p>
+        <h1>남았다!!!</h1>
+        <div>
+            <input type="text" placeholder="hour" id="hour_user">
+            <input type="text" placeholder="min" id="min_user">
+            <input type="text" placeholder="sec" id="sec_user">
+        </div>
+        <button onclick="send()">START</button>
+        <button onclick="clearInterval(interval)">Pause</button> 
+        <button onclick="reset()">STOP</button>
+    </div>
+</body>
+</html>

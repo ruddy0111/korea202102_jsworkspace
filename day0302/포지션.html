@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    /*css의 위치 속성은 여러가지가 있지만 가장 중요한 속성이 relative, absolute
+    relative:상대위치(모든 태그에 디폴트로 적용된 위치속성)
+            좌측 상단을 기준으로 한 포지션이며, 다른 태그 요소와의 관계에 의해 위치가
+            변경될 수 있다.(즉, 먼저 존재하는 태그에 의해 밀린다.)
+    absolute:절대위치(부모 태그를 기준으로 한 절대위치 속성)*/
+#box{
+    position: relative;
+    width:700px;
+    height: 450px;
+    background-color: cadetblue;
+    background-repeat: no-repeat;
+    margin:auto;
+}
+/*포지션 지정 시 가장 주의해야 할 것 
+    자식 요소에 포지션을 지정하면, 반드시 부모에도 포지션을 명시해야한다!*/
+#top-left{
+    position: absolute;/*부모 태그를 중심으로 한 위치 속성*/
+    left:0px
+}
+#top-right{
+    position: absolute;
+    right: 0px;
+}
+#bottom-left{
+    position: absolute;
+    bottom:0px; /*아래를 y축 기준점으로*/
+}
+#bottom-right{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+#center-div{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    /*top, left로 가운데 정렬 했으나 기준점이 첫 글자 이므로, tramsform통해 가운데 정렬 재지정*/
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <span id="top-left">Top Left</span>
+        <span id="top-right">Top Right</span>
+        <span id="bottom-left">bottom-left</span>
+        <span id="bottom-right">bottom-rigth</span>
+        <span id="center-div">Center</span>
+    </div>
+</body>
+</html>

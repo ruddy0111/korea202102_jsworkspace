@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+       .wrapper{
+        width: 500px;
+        height: 400px;
+        background-color: aliceblue;
+        margin: auto;
+       } 
+       #photo-frame{/*액자영역*/
+        width: 500px;
+        height: 340px;
+        background-color: antiquewhite;
+        overflow: hidden;
+        position: relative;/*자식인 container.때문에 명시*/
+       }
+       #container{
+        width: 3500px;
+        height: 340px;
+       }
+       #container img{
+        width: 500px;
+        height: 340px;
+        float: left;
+       }
+       #navi{/*조종버튼*/
+        text-align: center;
+        font-size: 30px;
+       }
+       #navi a{
+           text-decoration: none;/*링크 밑줄 없애기*/
+       }
+       /*a태그가 아닌, a태그에 올라간 상태 pseudo(가짜 명사)*/
+       /*태그의 상태 마저도 상태자가 될 수 있다*/
+       #navi a:hover{
+            color: palevioletred;
+       }
+</style>
+<script>
+    //포지션을 제어하기 위해, 문서 로드와 동시에 container에 absolure적용
+    var container; //모든함수에서 접근하기 위해
+    var targetX=-3500; //컨테이터의 x좌표를 담을 변수
+    var a=0.1 //비율계수, 수가 커지면 이동 폭도 커진다.(0.1~1 사이로 조절)
+    function init(){
+        container=document.getElementById("container");
+        container.style.position="absolute";//부모(photo-frame)을 기준으로 한 위치 속성
+    
+        container.style.top=0+"px";
+        container.style.left=0+"px";
+        setInterval("move()",10);
+    }
+    //container이동시키기
+    function move(x){
+       
+        //container.style.left=targetX+"px"; //순간이동
+        //감속도를 이용해서 부드럽게 처리
+        //물체 위치=현재 물체 위치+비율*(목표지점-현재물체위치)
+        container.style.left=parseFloat(container.style.left)+a*(targetX-parseFloat(container.style.left))+"px"
+        //setTimeout("move("+"x"+")",10) 이 위치에 있으면 안된다.
+    }
+    function setTarget(x){
+        targetX=x;//새로운 목표지점
+    }
+    window.addEventListener("load",function(){
+        init()
+    });
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="photo-frame">
+            <!--길다란 사진을 모아놓은 컨테이너 삽입-->
+            <div id="container">
+                <img src="../images/free/cat/aa.jpg" >
+                <img src="../images/free/cat/ab.jpg" >
+                <img src="../images/free/cat/ac.jpg" >
+                <img src="../images/free/cat/ad.jpg" >
+                <img src="../images/free/cat/ae.jpg" >
+                <img src="../images/free/cat/af.jpg" >
+                <img src="../images/free/cat/ai.jpg" >
+            </div>
+        </div>
+        <div id="navi">
+            <!--html문서에서 자바스크립트 작성 영역
+            1) script태그 안
+            2) 이벤트 핸들러 안
+            3) href안(javascript 명시)-->
+            <a href="javascript:setTarget(0)">●</a>
+            <a href="javascript:setTarget(-500)">●</a>
+            <a href="javascript:setTarget(-1000)">●</a>
+            <a href="javascript:setTarget(-1500)">●</a>
+            <a href="javascript:setTarget(-2000)">●</a>
+            <a href="javascript:setTarget(-2500)">●</a>
+            <a href="javascript:setTarget(-3000)">●</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원관리양식</title>
+<style>
+.wrapper{
+    width: 1000px;
+    height: 600px;
+    background: tomato;
+    margin: auto;
+    overflow: hidden;
+}
+#regist-area, #detail-area{
+    width: 150px;
+    height: 100%;
+    background: whitesmoke;
+    float: left;
+}
+#regist-area input, #detail-area input{
+    width: 80%;
+    font-size: 18px;
+    border-radius: 5%;
+    background-color: thistle;
+    color : gray;
+    border:1px solid whitesmoke;
+}
+#list-wrapper{
+    width: 700px;
+    height: 100%;
+    background-color: thistle;
+    float: left;
+}
+
+</style>
+<script src='../js/font.js' crossorigin='anonymous'></script>
+<script>
+//입력 양식의 데이터를 보관한 후, 테이블로 출력해본다
+//등록하기
+var listArea;
+var t_id, t_name, t_phone, t_money;
+var t_id2, t_name2, t_phone2, t_money2;
+var memberArray=[
+    ["batman", "배트맨", "010", "5000"],
+    ["superman", "슈퍼맨", "010", "500"],
+    ["xmen", "엑스맨", "010", "3000"],
+    ["spiderman", "스파이더맨", "010", "10"]
+];//회원 등록이 쌓이면 2차원 배열은 표가 되고, 데이터 베이스가 된다.
+var index;
+var t_seach;
+var searchArr=[];//검색한 결과값을 넣을 배열
+var searchIndex=[];
+
+function regist(){
+    for(var i=0;i<memberArray.length;i++){
+            if(memberArray[i][0]==t_id.value){
+                alert("중복 되는 아이디 입니다.");
+                t_id.value="";
+                t_id.focus();
+                return;    
+            }
+        }
+    for(var i=0;i<memberArray.length;i++){
+            if(memberArray[i][0]==t_id.value){
+                alert("중복되는 아이디 입니다.");
+                t_id.value="";
+                t_id.focus();
+                return;    
+            }
+        }
+    //등록 전 숫자형 데이터에 대해서 유효성 체크 해주기
+    if(isNaN(t_money.value)){
+        alert("자산은 숫자만 입력해주시기 바랍니다.");
+        t_money.value="";
+        t_money.focus();
+        return;//함수 호출한 곳으로 되돌아가
+    }if(isNaN(t_phone.value)){
+        alert("연락처는 숫자만 입력해주시기 바랍니다.");
+        t_phone.value="";
+        t_phone.focus();
+        return;//함수 호출한 곳으로 되돌아가
+    }
+    //등록 버튼에 등록된 1차원 배열을 2차원 배열에 담아 표로 만들자
+    var member=[];//비어있는 배열 선언
+    member[0]=t_id.value;
+    member[1]=t_name.value;
+    member[2]=t_phone.value;
+    member[3]=t_money.value;
+    //한사람의 정보가 메모리에 올라옴
+    console.log("지금 등록된 회원은", member)
+    //이차원 배열 용도로 선언한 memberArray에 추가하자
+    memberArray.push(member);
+    console.log("누적회원수",memberArray)
+    
+    getList(memberArray);//등록된 데이터를 표로 보여주기 위해
+}
+//데이터를 테이블로 출력하기
+function getList(arr){ 
+    var tag="<table width=\"100%\"border=\"1\">";
+    tag+="<tr style=\"background:skyblue\">"
+    tag+="<td>No.</td>"
+    tag+="<td>ID</td>"
+    tag+="<td>Name</td>"
+    tag+="<td>Phone</td>"
+    tag+="<td>Money</td>"
+    tag+="</tr>"
+
+    var sum=0;
+
+    for(var i=(arr.length-1);i>=0;i--){ //층수만큼 반복       
+        var arrIndex=(arr==memberArray)?i:searchIndex[i];
+        tag+="<tr onClick=\"showme("+arrIndex+")\">"; 
+        tag+="<td>"+(i+1)+"</td>"; //얘는 배열에 넣은 적이 없으므로, 반복문에서 처리 불가
+        for(var a=0;a<arr[i].length;a++){            
+            tag+="<td>"+arr[i][a]+"</td>";
+            //3번째 데이터는 mone이므로, 이 데이터를 sum에 누적 시키자
+        }
+        sum=sum+parseInt(arr[i][3]);
+        //돈을 누적하는 횟수는 층과 관련, 바깥쪽 포문에서 처리
+        tag+="</tr>";    
+    }
+    tag+="<tr>"
+    tag+="<td colspan='5' aline='rigth'>가입 회원 수 : "+arr.length+", 누적 자산 : "+sum+"원</td>"
+    tag+="</tr>"
+    tag+="</table>";
+    //document.write()는 문서 전체에 지정한 문자열 출력
+    listArea.innerHTML=tag;
+}
+function showme(i){
+    index=i;
+    t_id2.value=memberArray[i][0];
+    t_name2.value=memberArray[i][1];
+    t_phone2.value=memberArray[i][2];
+    t_money2.value=memberArray[i][3];
+}
+function modify(){
+    if(confirm("수정 하시겠습니까?")){
+        for(var i=0;i<memberArray.length;i++){
+            if(memberArray[i][0]==t_id.value2){
+                alert("중복되는 아이디 입니다.");
+                t_id.value2="";
+                t_id2.focus();
+                return;    
+            }
+        }
+        if(isNaN(t_money2.value)){
+            alert("자산은 숫자만 입력해주시기 바랍니다.");
+            t_money2.value="";
+            t_money2.focus();
+            return;//함수 호출한 곳으로 되돌아가
+        } if(isNaN(t_phone2.value)){
+            alert("연락처는 숫자만 입력해주시기 바랍니다.");
+            t_phone2.value="";
+            t_phone2.focus();
+            return;//함수 호출한 곳으로 되돌아가
+        }
+        memberArray[index][0]=t_id2.value;
+        memberArray[index][1]=t_name2.value;
+        memberArray[index][2]=t_phone2.value;
+        memberArray[index][3]=t_money2.value;
+    }
+    getList(memberArray);
+}
+function bye(){
+    if(confirm("삭제 하시겠습니까?")){
+        memberArray.splice(index,1);
+    }
+    getList(memberArray);
+}
+function search(){
+    var n1 = document.getElementById("selMenu");
+    var n2 = document.getElementById("selMenu").options.selectedIndex;
+    var n3 = n1.options[n2].value
+
+    for(i=0;i<memberArray.length;i++){
+        if(memberArray[i][n3]==t_seach.value){
+            searchArr.push(memberArray[i]);
+            searchIndex.push(i);
+        }
+    }
+    getList(searchArr);
+    searchArr=[];
+}
+function init(){
+    listArea=document.getElementById("list-area");
+    //등록용
+    t_id = document.getElementById("t_id");
+    t_name = document.getElementById("t_name");
+    t_phone = document.getElementById("t_phone");
+    t_money = document.getElementById("t_money");
+    //상세보기용
+    t_id2 = document.getElementById("t_id2");
+    t_name2 = document.getElementById("t_name2");
+    t_phone2 = document.getElementById("t_phone2");
+    t_money2 = document.getElementById("t_money2");
+    //서치,,,불러오기,,,
+    t_seach=document.getElementById("t_seach");
+
+    getList(memberArray);
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="regist-area">
+            <input type="text" id="t_id" placeholder="ID">
+            <input type="text" id="t_name" placeholder="이름">
+            <input type="text" id="t_phone" placeholder="연락처">
+            <input type="text" id="t_money" placeholder="자산">
+            <button onClick="regist()">Submit</button>
+        </div>
+        <div id="list-wrapper">
+            <div id="search-area">
+                <select name="" id="selMenu">
+                    <option value="0">ID로 검색</option>
+                    <option value="1">이름으로 검색</option>
+                </select>
+                <input type="text" id="t_seach" placeholder="검색어 입력">
+                <button onClick="search()">Search
+                    <i class='fas fa-search'></i>
+                </button>
+            </div>
+            <div id="list-area">
+            </div>
+        </div>
+        <div id="detail-area">
+            <input type="text" id="t_id2" placeholder="ID">
+            <input type="text" id="t_name2" placeholder="이름">
+            <input type="text" id="t_phone2" placeholder="연락처">
+            <input type="text" id="t_money2" placeholder="자산">
+            <button onClick="modify()">수정</button>
+            <button onClick="bye()">삭제</button>
+        </div>
+    </div>
+</body>
+</html>

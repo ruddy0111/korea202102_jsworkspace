@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--id와 name의 공통점 및 차이점
+        공통점) 문서 내의 요소들 간 식별을 위해 사용
+        차이점) id는 중복 불가, name은 중복 가능
+        특히 html에서의 이름은 자바스크립트에서의 배열로 존재.
+        name은 중복을 허용하기 때문에, js내에서 배열로 접근이 가능하다.-->
+    <script>
+        function checkAll(){
+            //문서 내의 체크박스 중 kb라는 요소의 체크상태를 제어해보자
+            var ch=document.getElementsByName("ch");
+            for(i=0; i<ch.length;i++){
+                ch[i].checked=document.getElementById("king").checked;
+            }
+        }
+    </script>
+</head>
+<body>
+    <table border="1px" width="600px">
+        <tr>
+            <td width="30px" >
+                <input type="checkbox" id="king" onclick="checkAll()">
+            </td>
+            <td>이메일 제목</td>
+        </tr>
+        <tr>
+            <td width="30px" >
+                <input type="checkbox" id="box1" name="ch">
+            </td>
+            <td>체크박스일괄</td>
+        </tr>
+        <tr>
+            <td width="30px" >
+                <input type="checkbox" name="ch">
+            </td>
+            <td>스크롤배너</td>
+        </tr>
+        <tr>
+            <td width="30px" >
+                <input type="checkbox" name="ch">
+            </td>
+            <td>반복문출력</td>
+        </tr>
+    </table>
+</body>
+</html>

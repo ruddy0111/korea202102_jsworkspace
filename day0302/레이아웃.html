@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+/*Css의 문법 형식은 '누구를 어떻게' 형식이다.
+이 때 누구 자리에 오는 문법 요소를 선택자(selector)라 한다.*/
+.wrapper{
+    background-color:skyblue;
+    width:600px;
+    height:600px;
+    margin:auto; /*전체 웹페이지의 너비에서 600을 빼고 난 나머지를
+    2분할 하여 양쪽 동등하게 여백을 줌*/
+}
+#top-div{
+    background-color:rgb(142, 93, 233);
+    width:100%;
+    height:100px;
+}
+#side-div{
+    background-color: rgb(19, 112, 250);
+    width: 100px;
+    height: 400px;
+    float: left;
+}
+#content-div{
+    background-color: rgb(115, 113, 252);
+    width: 500px;
+    height: 400px;
+    float: left;
+}
+#footer-div{
+    background-color: rgb(160, 187, 236);
+    width: 100%;
+    height: 100px;
+    clear:both;
+    /*float된 공간을 메꾸지 않는다*/
+    /*컴퓨터에서는 색상을 표현할 때 빛의 3원색으로 표현할 수 있다.
+    red(256) Green(256) blue(256)
+    16진수 값
+    정해진 문자 상수도 존재. but, 디테일한 색 표현 불가능. 따라서 16진수로 표현*/
+}
+.top-navi{
+    /*background-color: darkgray; 지저분해서 주석 처리하여 안 보이게 숨김*/
+    /*자식들이 float 처리가 된 경우 부모에는 반드시 overflow:hidden속성을 지정한다.*/
+}
+/*top-navi안의 navi지시 : 스페이스바*/
+.top-navi a{
+    text-decoration: none; /*링크 밑줄 없애기*/
+    font-size: 18px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border: 1px solid black;
+    float: left;
+}
+#cs{
+    float:right;
+}
+/*a태그에 마우스 올려놓았을 때 배경색 주기*/
+/*hover:마우스가 올라간 a에 대해서.
+ hover는 태그가 아니다.;유사태그 */
+.top-navi a:hover{
+    background-color: cadetblue;
+}
+</style>
+</head>
+
+<body>
+    <!--모든 div를 감쌀 최상위 부모 컨테이너-->
+    <div class="wrapper">
+        <div id="top-div">
+            <div class="top-navi">
+                <a href="#">Home</a>
+                <a href="#">Shopping</a>
+                <a href="#">MyPage</a>
+                  <div id="cs">
+                 <a href="#">CS</a>
+                  </div>
+            </div>
+        </div>
+        <div id="side-div"></div>
+        <div id="content-div"></div>
+        <div id="footer-div"></div>
+        </div>
+</body>
+</html>

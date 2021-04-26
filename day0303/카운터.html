@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카운터</title>
+<style>
+    input{
+        width: 600px;
+        height: 400px;
+        background-color: rgb(199, 199, 235);
+        color: cornflowerblue;
+        font-size: 200px;
+        text-align: center;
+    }
+</style>
+<script>
+//문서 내의 input 요소의 value값을 1씩 증가 시켜보자
+
+var n=0; //n누적, 기존의 n에 1 더한 값 최종 적용
+
+function setCount(){
+    n=n+1;
+    document.querySelector("#txt").value=n;
+}
+
+function auto(){
+    setInterval("setCount()",1000); //1/1000초까지 표현 가능
+}
+</script>
+</head>
+<body>
+    <button onclick="setCount()">카운터 증가</button>
+    <button onclick="auto();this.disabled=true">자동 증가</button>
+    <br>
+    <input id="txt" type="text" value="0">
+
+</body>
+</html>

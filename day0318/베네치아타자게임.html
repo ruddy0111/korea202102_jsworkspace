@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+width: 1200px;
+height: 600px;
+background-color: antiquewhite;
+margin: auto;
+overflow: hidden;
+}
+#dashBoard{
+    width: 200px;
+    height: 100%;
+    background-color: bisque;
+    float: left;
+}
+#content{
+    width: 1000px;
+    height: 100%;
+    background-color: cornflowerblue;
+    float: left;
+    position: relative;
+}
+#dashBoard input{
+    width: 95%;
+    font-size:20px;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: bold;
+}
+#hpBox{
+    width: 100%;
+    height: 190px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding:10px 2px 2px 2px;/*left top rigth bottom*/
+}
+#scoreArea{
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+}
+</style>
+<script src="../js/lib.js"></script>
+<script>
+var hpBox;
+var content;
+var scoreArea;
+var keyword;
+var spanArray=[];//단어가 10개 이상이므로 span도 배열로 담자.
+var y=8;//단어의 초기 위치
+var velY=10;//단어의 속도
+var score=0;//점수를 누적시킬 전역 변수
+var wordArray=["마우스","광화문","핸드폰","지구","개구리","태풍","콘센트","자바","강아지","실로폰"];
+var  yArray=[];
+
+function init(){
+    hpBox=document.getElementById("hpBox");
+    content=document.getElementById("content");
+    scoreArea=document.getElementById("scoreArea");
+    keyword=document.getElementById("keyword");
+
+    keyword.addEventListener("keyup",function(){
+        //엔터키를 누르면 단어와 입력데이터와 비교
+        //console.log(enter.keyCode);//
+        if(event.keyCode==13){     
+            for(var i=0; i<spanArray.length;i++){
+                if(spanArray[i].innerText==keyword.value){
+                    //span은 완전히 제거
+                    //화면에 부착할 때는 append
+                    content.removeChild(spanArray[i]);
+                    spanArray.splice(i,1);
+                    console.log("남은단어의 수는",spanArray.length)
+                    keyword.value="";//텍스트입력 초기화
+                    score+=10;
+                    printScore();
+                }
+            }
+        }
+    });
+}
+
+function createHP(){
+    for(i=0;i<9;i++){
+    //HP박스를 DIV로 총 9개 생성 
+    var rect = document.createElement("div");
+    rect.style.width=60+"px";
+    rect.style.height=50+"px";
+    rect.style.backgroundColor="cornflowerblue";
+    rect.style.border="1px solid black";
+    rect.style.borderRadius=20+"%";
+    rect.style.float="left";
+    hpBox.appendChild(rect);
+    }
+}
+function printScore(){//점수 출력 함수
+    scoreArea.innerText=score+"점";
+}
+function createWord(){
+    //단어를 감싸게 될 요소의 선택 기준 : 단어의 길이 만큼만
+    //span은 단지 감싸는게 목적이고, inline 방식이라서 너비가 컨텐츠 만큼만 확보
+    for(var i=0; i<wordArray.length; i++){
+    var span = document.createElement("span");
+    span.innerText=wordArray[i];
+    span.style.backgroundColor="white";
+    span.style.position="absolute";
+    span.style.left=0+(100*i)+"px";//서로 떨어지게끔
+    yArray[i]=getRandom(-300);
+
+    span.style.top=yArray[i]+"px";
+
+    content.appendChild(span);
+    //지역변수인 span이 죽기 전에 배열에 담아놓자
+    spanArray.push(span);
+    }
+}
+function dropDown(){
+   
+    for(var i=0;i<spanArray.length;i++){
+        yArray[i]=yArray[i]+velY;
+        spanArray[i].style.top=yArray[i]+"px";//한 요소만 내리지 말고 10개 다 내려오자
+    
+    //지금 떨어지고 있는 span각자는 스스로 600을 넘어서고 있는지 체크해야 한다.
+        if(yArray[i]>=600){
+            
+        }
+    }
+}
+window.addEventListener("load", function(){
+    init();
+    createHP();
+    printScore();
+    createWord();
+    setInterval("dropDown()",1000);
+    keyword.focus();
+});
+
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="dashBoard">
+            <div id="hpBox"></div>
+            <input type="text" placeholder="단어입력" id="keyword">    
+            <div id="scoreArea">점수</div>
+        </div>
+        <div id="content">
+            <span></span>
+        </div>    
+    </div>
+</body>
+</html>

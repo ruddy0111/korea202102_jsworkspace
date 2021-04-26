@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#wrapper{
+    margin: auto;
+    width: 1200px;
+    height: 650px;
+    background: url(../images/free/self01.jpg);
+    background-size: 1200px 650px;
+    background-repeat: repeat-x;
+    position: relative;
+    overflow: hidden;
+}
+    </style>
+    <script>
+        var img; //전역변수로 선언
+        var x=0; //프로그램이 끝날 때까지 값이 10씩 누적되어야 하므로 전역변수 선언
+        var y=200;
+        var container;
+        var bgX=0; //숫자값은 반드시 초기화 시켜주자
+        //undefined인 경우 db의 null과 같아서 연산의 대상이 되지 않는다.
+       
+        function init(){//우주선을 디자인적으로 생성시키지 말고, 프로그래밍 적으로 생성해보자
+        img=document.createElement("img");//기존에 없던 요소 생성
+        img.src="../images/free/cat001.png"
+        img.id="hero"; //프로그래밍적으로 아이디 부여
+        img.style.width=100+"px";
+        img.style.height=100+"px";
+        img.style.position="absolute";
+        img.style.left=0+"px";
+        img.style.top=200+"px";
+
+        container=document.getElementById("wrapper"); //이미 존재하는거 가져오기
+        //wrapper에 이미지를 자식으로 부착
+        container.appendChild(img)
+        setInterval("moveBg()",10)
+        }
+     
+        function joystick(){
+           //키보드 철자 마다 대응하는 아스키코드로 변환되여 컴퓨터에게 전달.
+           //컴퓨터는 0과 1 만을 이해하기 때문. 따라서 이진수로 변환하기 위함.
+           //event.keycode이용해서 아스키코드 확인 가능
+           console.log("매칭되는 아스키코드는?",event.keyCode);
+            //우주선을 x축 방향으로 증가(우측이동효과)
+           if(event.keyCode==39) {
+            x+=10; //전역변수에 10씩 이동
+            img.style.left=x+"px";
+            }
+            //우주선을 x축 방향으로 감소(좌측이동효과)
+            if(event.keyCode==37) {
+            x-=10; //전역변수에 10씩 이동
+            img.style.left=x+"px";
+            }
+            //우주선을 y축 방향으로 증가(아래이동효과)
+            if(event.keyCode==40) {
+            y+=10; //전역변수에 10씩 이동
+            img.style.top=y+"px";
+            }
+            //우주선을 y축 방향으로 감소(위쪽이동효과)
+            if(event.keyCode==38) {
+            y-=10; //전역변수에 10씩 이동
+            img.style.top=y+"px";
+            }
+        }
+        function moveBg(){
+            bgX--; //bgX=bgX-1
+            container.style.backgroundPosition=bgX+"px 0px";//x축 y축
+
+            //moveBg();//속도를 늦추는 법
+            //setTimeout("moveBg()",10); //지정한 함수를 지정한 시간 뒤에 호출 1/1000초단위 까지 가능
+            //moveBg안의 moveBg무한루프(재귀호출) 효과 발생
+            /*
+            setInterval("moveBg()")무한호출
+            setTimeout()1회호출, 무한루프*/
+        }
+        
+    </script>
+</head>
+<body onLoad="init(); " onkeydown="joystick();">
+    <div id="wrapper" >게임 배경 나올 곳</div>
+</body>
+</html>
+<script>
+    //옵션1) 스크립트 자체를 문서 제일 아래에 두는 방법
+    //옵션2) 문서의 내용이 다 읽혀졌을 때 호출되는 이벤트 핸들러 이용 onLoad
+    // ->문자열을 감싸는 기능을 갖는 특수문자에 역슬래시 붙이면 일반문자 된다(escape)
+    //init(); //기존 함수 호출
+
+</script>

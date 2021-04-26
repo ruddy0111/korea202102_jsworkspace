@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+
+        }
+        #wrapper{
+            width: 100%;
+            height: 600px;
+            background: aliceblue;  
+            position: relative;
+        }
+    </style>
+    <script>
+        var img; //모든 함수에서 접근이 가능하도록 전역변수로 선언한다
+        var flag=false; //공을 따라다닐지 말지 결정할 기준 변수
+        //마우스를 움직이는 동안 마우스의 좌표를 구해보자
+
+         function getPos(){
+            console.log("마우스를 움직이는 군요");
+            //마우스의 좌표 구하기
+            var x=event.clientX;//마우스의 x좌표
+            var y=event.clientY;//마우스의 y좌표
+            document.getElementById("x-pos").innerText=x;
+            document.getElementById("y-pos").innerText=y;
+
+            if(flag==false){
+                img.style.border="2px solid red";
+            }else{
+                img.style.border="0px"
+            }
+            
+
+            if(flag){
+            //고양이의 좌표를, 마우스와 일치시켜보자 //좌표를 50/100 으로 옮겨 마우스 포인터와 위치 일치
+            img.style.left=(x-50)+"px";
+            img.style.top=(y-50)+"px";
+            }
+        }
+        
+        function init(){
+            //이미지를 동적으로 생성하여 wrapper에 부착해보자
+            img = document.createElement("img");
+            img.src="../images/free/cat001.png";
+            img.style.position="absolute";
+            img.style.left=100+"px";
+            img.style.top=150+"px";
+            img.style.width=100+"px";
+            img.style.height=100+"px";
+
+            //공의 테두리로 사용자가 집어야할지 말지를 알 수 있게
+
+            //기존의 tag에 디자인적으로 부여했던 onclick이벤트 핸들러를, 자바 코드로 전환
+            img.addEventListener("click", function(){
+                flag=!flag;
+            });
+
+            var wrapper = document.getElementById("wrapper");
+            wrapper.appendChild(img);
+        }
+        
+    </script>
+</head>
+<body onMouseMove="getPos()" onLoad="init()">
+    <!--mousemove이벤트는, 물체위에서 인식되므로 body크기 만한div로
+    화면 전체를 덮어서 구현해보자-->
+<div id="wrapper">
+    <span id="x-pos"></span>px;
+    <span id="y-pos"></span>px;
+
+</div>
+</body>
+</html>

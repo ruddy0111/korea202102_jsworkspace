@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>판단 결과 나올 곳</h1>
+
+<script>
+    /*함수를 사용하지 않고 그냥 무조건 자바스크립트 코드를 수행할 경우 
+    스크립트 삽입 위치는 디자인이 다 읽혀진 완료 시점인 닫는 body직전에
+    넣는 것이 대세(bootstrap, 편집기, 구글맵, jquery 오픈소스 등*/
+
+    var msg;
+    var result=prompt("원하시는 수를 입력하세요"); //입력 메시지 창
+    msg=(result%2==0)?"짝수":"홀수";
+    //==0비교 연산자. result%2만 넣어도 원하는 답은 나오나, 
+    //불완전 하므로 ==0을 꼭 넣자
+    document.querySelector("h1").innerText=msg+"입니다!"
+    
+</script>
+</body>
+</html>

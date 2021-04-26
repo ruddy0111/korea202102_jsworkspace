@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+#wrapper{
+    margin: auto;
+    height: 300px;
+    width:900px;
+    background-color: aliceblue;
+}
+#wrapper button{
+    padding:5px 15px;
+
+    border : solid rgb(255, 255, 255);
+    font-size: 15px;
+    border-radius: 10px;
+}
+#wrapper button:hover{
+    background-color: aliceblue;
+     color: palevioletred;
+}
+#wrapper input{
+    font-size:120px;
+    width:150px;
+    text-align: center;
+    margin: 30px;
+}
+#buttons{
+    text-align: center;
+}
+#times{
+    text-align: center;
+    font-size:60px;
+}
+</style>
+
+<script>
+    var t_hour;
+    var t_min;//숫자 자체가 아니라, input 박스므로 초기화(0)해서는 안된다.
+    var t_sec;
+    //프로그램 가동과 동시에, 초기화 시킬 작업이 있다면 init()에서 하자
+    var sec=0;//초를 담을 전역변수(숫자이므로 초기화 필요)
+    var min=0;// 담을 전역변수(숫자이므로 초기화 필요)
+    var hour=0;
+    var interval;
+//0에 대한 처리를 해주는 함수
+function getZeroString(n){
+    var result;
+    if(n<10){
+        result="0"+n;
+    }else{
+        result=n;
+    }
+    return result;
+}
+function init(){
+    t_hour=document.getElementById("t_hour");
+    t_min=document.getElementById("t_min");
+    t_sec=document.getElementById("t_sec");
+    //분과 초를 0으로 초기화
+    t_hour.value="0"+0;
+    t_min.value="0"+0;
+    t_sec.value="0"+0;
+}
+function countUp(){//초를 증가시키자
+    sec++;
+    if(sec>=59){
+        sec=0;
+        min++
+    }else if (min>=59) {
+        min=0;
+        hour++
+    }
+    t_hour.value=getZeroString(hour);
+    t_min.value=getZeroString(min);
+    t_sec.value=getZeroString(sec);
+}
+function countUp2(){
+        interval = setInterval("countUp()", 1000)
+    };
+function reset(){
+    clearInterval(interval);
+
+    sec=0;
+    min=0;
+    hour=0;
+
+    t_hour.value=getZeroString(hour);
+    t_min.value=getZeroString(min);
+    t_sec.value=getZeroString(sec);
+    document.getElementById("startBt").disabled=false;
+    init();    
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="times">
+            <input type="text" value="00" id="t_hour">시
+            <input type="text" value="00" id="t_min">분    
+            <input type="text" value="00" id="t_sec">초
+         </div>
+        <p> 
+        <div id="buttons">
+            <button onClick="countUp()">Set</button>    
+            <button id="startBt" onClick="countUp2();this.disabled=true">Start</button> 
+            <button onclick="clearInterval(interval)">Pause</button> 
+            <button onclick="reset()">Reset</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모자이크</title>
+
+</head>
+<script src="../js/Rect.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+var cellSize=50;
+var cols=5;
+var rows=5;
+var container;
+var colorArray=["rgb(199, 215, 230)","rgb(150, 185, 216)","rgb(43, 104, 156)", "rgb(79, 133, 180)", "blue","navy"];
+var a=0;
+var i=0;
+var count=0;
+//setInterval이 언제까지 수행할지 범위를 지정
+
+function init(){
+    container=document.createElement("div");
+    container.style.width=cellSize*cols+"px";
+    container.style.height=cellSize*rows+"px";
+    container.style.margin="auto";
+    container.style.backgroundImage="url(../images/free/jelly.jpg)";
+    container.style.backgroundSize=(cellSize*cols)+"px "+(cellSize*rows)+"px";
+    container.style.position="relative";
+
+    document.body.appendChild(container);
+
+}
+function createRect(){
+     //for(var a=0;a<=rows;a++){
+         //for(var i=0;i<=cols;i++){
+         new Rect(container,cellSize,cellSize,i*cellSize,a*cellSize,colorArray[getRandom(colorArray.length)]);
+         i++;
+         if(i%cols==0){
+            a++;//층수 증가
+            i=0;//i처음부터
+         }
+         //i가 끝에 도달하면 다시 i를 0으로 돌려놓아야 순환됨
+        //}
+    //}
+}
+//반복문은 너무 빠르므로, 원하는 시간을 지정하여 반복수행을 대신 해본다.
+function auto(){
+    if(count<(cols*rows)){
+        createRect();
+    }
+    count++
+}
+window.addEventListener("load",function(){
+    init();
+    setInterval("auto()",10);
+})
+</script>
+<body>
+
+</body>
+</html>

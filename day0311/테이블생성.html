@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+
+    </style>
+</head>
+
+<script>
+    /*document.write()는 문자열에 태그를 넣어 출력하는 방식. 다른 방식도 존재. createElement()가능*/
+    window.addEventListener("load", function(){
+        createTable();
+    });
+    function createTable(){
+        //문서 내에 없었던 태그를 create처리하여 생성하는 방법으로 테이블 구성
+        //몇층의 몇 호수로 생성할지 프롬프트 이용하여 입력 받아보자
+        var f=parseInt(prompt("원하는 층수를 입력하세요"));
+        var ho=parseInt(prompt("원하는 호수를 입력하세요"));
+        var b=parseInt(prompt("원하는 벽 두께를 입력하세요"));
+
+        var table = document.createElement("table");//<Table></Table>
+        table.style.width=300+"px";
+        table.border=b+"px";
+        table.style.textAlign="center";
+        
+
+        for(var n=f;n>=1;n--){
+            var tr = document.createElement("tr");
+            for(var i=1; i<=ho;i++){
+            var td = document.createElement("td");
+            td.innerText=n+"0"+i+"호";
+            tr.appendChild(td);//테이블에 부착
+            }
+            table.appendChild(tr);//테이블에 부착(왜 이 위치에 붙이는지는 java시간에 알게됨)
+        }
+        
+        document.body.appendChild(table);//body에 부착
+    }
+
+</script>
+<body>
+    
+</body>
+</html>

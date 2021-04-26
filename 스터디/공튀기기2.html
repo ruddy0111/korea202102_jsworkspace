@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+
+    <script src="../js/lib.js"></script>
+    <script src="../js/Ballgame.js"></script>
+    <script>
+
+        var bar, wrapper, ball;
+        var block = [];
+        //var ballflag=false;
+        var barx,velX,velY,limitX, limitY;
+        var gameflag=true;
+
+        function init() {
+            createWall();
+            createBar();
+            createBall();
+            createBlock();
+        }
+
+        function createWall() {
+            wrapper = document.getElementById("wrapper");
+            wrapper.style.width = 700 + "px";
+            wrapper.style.height = 700 + "px";
+            wrapper.style.border = 5 + "px solid red";
+            wrapper.style.position = "relative";
+            wrapper.style.left = 30 + "px";
+            wrapper.style.margin = "auto"
+            wrapper.style.overflow = "hidden";
+            document.body.appendChild(wrapper);
+
+            limitX = wrapper.style.width;
+            limitY = wrapper.style.top;
+     
+        }
+
+        function createBar() {
+            bar = document.createElement("div");
+
+            bar.style.backgroundColor = "yellow";
+            bar.style.width = 70 + "px";
+            bar.style.height = 10 + "px";
+            bar.style.position = "absolute";
+            bar.style.float = "left";
+            bar.style.left = 350 + "px";
+            bar.style.top = 650 + "px";
+
+            wrapper.appendChild(bar);
+
+
+
+        }
+
+        function createBall() {
+
+            ball = new Ballgame(wrapper,"../images/ball/ball1.png", 33, 33 , 5 , 10, 350, 600 );   //생성되는 공은 wrapper에 부착됨!!! 
+            
+
+        }
+
+        function createBlock() {
+            var x = 0;
+            var y = 0;
+            for (var i = 0; i < 4; i++) {
+
+                block[i] = document.createElement("div");
+                block[i].style.width = 100 + "px";
+                block[i].style.height = 100 + "px";
+                block[i].style.background = "white";
+                block[i].style.position = "absolute";
+                block[i].style.float = "left";
+                block[i].style.border = 5 + "px solid black";
+                if (i == 2) {
+                    x = 0;      
+                    y = 100     //두번째줄 강제로 아래로 내리기
+
+                }
+                block[i].style.left = 250 + (x * 100) + "px";
+                block[i].style.top = 150 + y + "px";
+                x++;
+
+                wrapper.appendChild(block[i]);
+            }
+        }
+
+        function moveBar() {
+           barx = event.clientX; //x축 좌표
+           
+            //  var  y = event.clientY; /y축 좌표
+
+            bar.style.left = barx - 550 + "px";  //550은 마진값+바 가운데로 맞춘 숫자
+            // bar.style.top = y + "px";  
+
+        }
+
+        function gameLoop() {
+          
+          if(gameflag) {
+              ball.move();
+          }
+        }
+
+
+        window.addEventListener("load", function () {
+            init();
+
+             setInterval("gameLoop()", 12);
+        });
+
+    </script>
+
+</head>
+
+<body onmousemove="moveBar()">
+    <div id="wrapper"></div>
+
+</body>
+
+</html>
