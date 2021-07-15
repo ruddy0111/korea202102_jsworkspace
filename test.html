@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script>
+function checkAll(){
+    var ch=document.getElementsByName("ch");
+    for(var i=0;i<ch.length;i++){
+        ch[i].checked=document.getElementById("king").checked;
+    }
+}
+</script>
+</head>
+<body>
+    <input type="checkbox" id="king" onclick="checkAll()"></br>
+    <input type="checkbox" name="ch"></br>
+    <input type="checkbox" name="ch"></br>
+    <input type="checkbox" name="ch"></br>
+    <input type="checkbox" name="ch">
+
+
+</body>
+</html>
